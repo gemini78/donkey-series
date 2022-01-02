@@ -1,7 +1,6 @@
-body {
-    background-color: lightgray;
-    
-    h1 {
-        color: red;
-    }
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap');
+
+$primary: #3398DB;
+$secondary: #E67E22;
+
+@import "~bootstrap/scss/bootstrap";
