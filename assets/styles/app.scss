@@ -9,3 +9,22 @@ $secondary: #E67E22;
     display: flex;
     justify-content: space-between;
 }
+
+.episode-actions {
+    display: flex;
+    justify-content: space-between;
+    
+    i {
+        color: $secondary;
+    }
+}
+
+.season-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    
+    i {
+        color: $secondary;
+    }
+}
