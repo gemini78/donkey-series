@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container my-3">
+	<div class="container my-3 program">
 		<div class="media text-center">
 			<img class="" src="{{program.poster}}" alt="{{ program.title }} poster">
 			<div class="media-body">
@@ -43,7 +43,8 @@
 			</tbody>
 		</table>
 
-		<a href="{{ path('program_index') }}">
+
+		<a class="btn btn-outline-primary" href="{{ path('program_index') }}">
 			Retour à la liste des programmes
 		</a>
 

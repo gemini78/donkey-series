@@ -7,14 +7,13 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 mx-auto">
-				<h1 class="text-center my-3">Episode index</h1>
+				<h1 class="text-center my-3">Episodes</h1>
 				<div class="position-relative my-5">
 					<a class="btn btn-outline-secondary position-absolute bottom-0 end-0" href="{{ path('episode_new') }}">Create new</a>
 				</div>
-				<table class="table table-striped mt-5">
-
+				<table class="table table-episode table-striped mt-5">
 					<thead>
-						<tr>
+						<tr class="text-center">
 							<th>Id</th>
 							<th>Title</th>
 							<th>Number</th>
@@ -28,7 +27,7 @@
 								<td>{{ episode.id }}</td>
 								<td>{{ episode.title }}</td>
 								<td>{{ episode.number }}</td>
-								<td>{{ episode.synopsis }}</td>
+								<td class="text-justify">{{ episode.synopsis }}</td>
 								<td>
 									<div class="episode-actions">
 										<a title="show" href="{{ path('episode_show', {'id': episode.id}) }}">
