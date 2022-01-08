@@ -26,6 +26,10 @@ nav {
     background-size: cover;
 }
 
+td {
+    vertical-align: middle
+}
+
 #welcome {
     position: relative;
 
@@ -77,6 +81,14 @@ nav {
         td {
             text-align: center;
         }
+    }
+}
+
+.table-actor {
+    
+    td:nth-child(2) {
+        text-transform: uppercase;
+        font-size: 1.5rem;
     }
 }
 
