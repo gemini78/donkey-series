@@ -3,10 +3,10 @@
 namespace App\DataFixtures;
 
 use App\Entity\Program;
+use App\Service\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use PhpParser\Node\Stmt\Break_;
 
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -54,13 +54,22 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         ]
     ];
 
+    protected $slugify;
+
+    public function __construct(Slugify $slugify)
+    {
+        $this->slugify = $slugify;
+    }
     public function load(ObjectManager $manager): void
     {
-
         foreach (self::PROGRAMS as $key => $datas) {
+
+            $slug = $this->slugify->generate($datas['title']);
+
             $program = new Program();
             $program
                 ->setTitle($datas['title'])
+                ->setSlug($slug)
                 ->setSynopsis($datas['synopsis'])
                 ->setPoster($datas['poster'])
                 ->setYear($datas['year'])

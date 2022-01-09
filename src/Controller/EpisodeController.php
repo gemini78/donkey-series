@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Episode;
 use App\Form\EpisodeType;
 use App\Repository\EpisodeRepository;
+use App\Service\Slugify;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,13 +25,15 @@ class EpisodeController extends AbstractController
     }
 
     #[Route('/new', name: 'episode_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, Slugify $slugify): Response
     {
         $episode = new Episode();
         $form = $this->createForm(EpisodeType::class, $episode);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $slugify->generate($episode->getTitle());
+            $episode->setSlug($slug);
             $entityManager->persist($episode);
             $entityManager->flush();
 
@@ -42,21 +46,26 @@ class EpisodeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'episode_show', methods: ['GET'])]
-    public function show(Episode $episode): Response
+    #[Route('/{id}', name: 'episode_delete', methods: ['POST'], requirements: ['id' => '\d+'])]
+    public function delete(Request $request, Episode $episode, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('episode/show.html.twig', [
-            'episode' => $episode,
-        ]);
+        if ($this->isCsrfTokenValid('delete' . $episode->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($episode);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('episode_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/edit', name: 'episode_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Episode $episode, EntityManagerInterface $entityManager): Response
+    #[Route('/{slug}/edit', name: 'episode_edit', requirements: ['slug' => '[a-zA-Z0-9\-\/]+',], methods: ['GET', 'POST'])]
+    public function edit(Request $request, Episode $episode, EntityManagerInterface $entityManager, Slugify $slugify): Response
     {
         $form = $this->createForm(EpisodeType::class, $episode);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $slugify->generate($episode->getTitle());
+            $episode->setSlug($slug);
             $entityManager->flush();
 
             return $this->redirectToRoute('episode_index', [], Response::HTTP_SEE_OTHER);
@@ -68,14 +77,11 @@ class EpisodeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'episode_delete', methods: ['POST'])]
-    public function delete(Request $request, Episode $episode, EntityManagerInterface $entityManager): Response
+    #[Route('/{slug}', name: 'episode_show', requirements: ['slug' => '[a-zA-Z0-9\-\/]+',])]
+    public function show(Episode $episode): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$episode->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($episode);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('episode_index', [], Response::HTTP_SEE_OTHER);
+        return $this->render('episode/show.html.twig', [
+            'episode' => $episode,
+        ]);
     }
 }

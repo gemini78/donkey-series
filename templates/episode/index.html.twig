@@ -30,10 +30,10 @@
 								<td class="text-justify">{{ episode.synopsis }}</td>
 								<td>
 									<div class="episode-actions">
-										<a title="show" href="{{ path('episode_show', {'id': episode.id}) }}">
+										<a title="show" href="{{ path('episode_show',{slug:episode.slug} ) }}">
 											<i class="fas fa-eye"></i>
 										</a>
-										<a title="edit" href="{{ path('episode_edit', {'id': episode.id}) }}">
+										<a title="edit" href="{{ path('episode_edit', {'slug': episode.slug}) }}">
 											<i class="fas fa-pencil-alt"></i>
 										</a>
 									</div>
