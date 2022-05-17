@@ -6,6 +6,10 @@
 {%block body %}
 	<div class="container">
 		<h1 class="my-3 text-center">Programs</h1>
+		<div class="position-relative my-5">
+			<a class="btn btn-outline-secondary position-absolute bottom-0 end-0" href="{{ path('program_new') }}">Create new</a>
+		</div>
+
 		{% for program in programs %}
 			<div class="mb-5">
 				<h2>
