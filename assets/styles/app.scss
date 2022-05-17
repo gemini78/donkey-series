@@ -3,9 +3,105 @@
 $primary: #3398DB;
 $secondary: #E67E22;
 
+$time-transition: 0.3s;
+$scale-factor: 1.5;
+
 @import "~bootstrap/scss/bootstrap";
 
+nav {
+    margin-bottom: 1px;
+
+    a {
+        text-transform: uppercase;
+    }
+}
+
+.bg {
+    background: url('../images/banner.jpg');
+    height: 90vh;
+    width: auto;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#welcome {
+    position: relative;
+
+    .content {
+        padding: 1rem;
+        position: absolute;
+        top: 50%;
+        right: 50%;
+        color: white;
+        text-align: center;
+        background: $secondary;
+        transform: translate(50%,-50%);
+        border: 1px solid white;
+    }
+}
 .box-category {
     display: flex;
     justify-content: space-between;
+}
+
+.program {
+
+    img {
+        width: 230px;
+        height: 290px;
+    }
+}
+
+.episode-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    i {
+        transition: color $time-transition ease-out , transform $time-transition ease-out;
+    }
+
+    a:hover i {
+        color: $secondary;
+        transform: scale($scale-factor);
+    }
+}
+
+.table-category,
+.table-episode,
+.table-season {
+
+    tbody {
+        td {
+            text-align: center;
+        }
+    }
+}
+
+.season-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    
+    i {
+        transition: color $time-transition ease-out , transform $time-transition ease-out;
+    }
+
+    a:hover i {
+        color: $secondary;
+        transform: scale($scale-factor);
+    }
+}
+
+.category-actions {
+    i {
+        transition: color $time-transition ease-out , transform $time-transition ease-out;
+    }
+
+    a:hover i {
+        color: $secondary;
+        transform: scale($scale-factor);
+    }
 }

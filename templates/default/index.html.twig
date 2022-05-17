@@ -1,10 +1,16 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-	<h1>Bienvenue !</h1>
-	<img src="{{ asset('build/images/veyron.png') }}" alt="">
-	<p>
-		Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit veritatis ea fugiat ut error consequatur laudantium enim deleniti eveniet quisquam id assumenda beatae alias, totam ipsam sapiente similique delectus! Distinctio!
-	</p>
-	<a href="#" class="btn btn-secondary">TEST</a>
+{% extends 'base.html.twig' %} {% block body %}
+<section id="welcome">
+  <div class="container-fluid bg">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="content">
+          <div class="intro">
+            <h1 class="display-1">Donkey-Series</h1>
+            <p class="display-5">the best programs</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
