@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %} {% block title %}Episode #{{ program.id }}
+{% endblock %} {% block body %}
+<div class="container my-3">
+  <div class="media text-center">
+    <img class="" src="{{ program.poster }}" alt="{{ program.title }} poster" />
+    <ul class="list-group my-3">
+      <li
+        class="list-group-item d-flex justify-content-between align-items-start"
+      >
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">Titre de la série</div>
+        </div>
+        <div>
+          {{ program.title }}
+        </div>
+      </li>
+      <li
+        class="list-group-item d-flex justify-content-between align-items-start"
+      >
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">Catégorie</div>
+        </div>
+        <div>
+          {{ program.category.name }}
+        </div>
+      </li>
+      <li
+        class="list-group-item d-flex justify-content-between align-items-start"
+      >
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">N° de la saison</div>
+        </div>
+        <div>
+          {{ season.number }}
+        </div>
+      </li>
+      <li
+        class="list-group-item d-flex justify-content-between align-items-start"
+      >
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">Titre de l'épisode</div>
+        </div>
+        <div>
+          {{ episode.title }}
+        </div>
+      </li>
+      <li
+        class="list-group-item d-flex justify-content-between align-items-start"
+      >
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">N° de l'épisode</div>
+        </div>
+        <div>
+          {{ episode.number }}
+        </div>
+      </li>
+      <li
+        class="list-group-item d-flex justify-content-between align-items-start"
+      >
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">Résumé de l'épisode</div>
+        </div>
+        <div>
+          {{ episode.synopsis }}
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div></div>
+
+  <a href="{{ path('program_index') }}"> Retour à la liste des programmes </a>
+</div>
+{% endblock %}

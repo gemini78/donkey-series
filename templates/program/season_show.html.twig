@@ -41,6 +41,7 @@
 					<th>Number</th>
 					<th>Title</th>
 					<th>Synopsis</th>
+					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -51,6 +52,10 @@
 						<td>
 							<p>{{ episode.synopsis }}</p>
 						</td>
+						<td>
+							<a href="{{ path('program_episode_show', { programId:program.id, seasonId:season.id, episodeId:episode.id } ) }}" class="btn btn-outline-secondary">Détails</a>
+						</td>
+
 					</tr>
 				{% endfor %}
 			</tbody>
