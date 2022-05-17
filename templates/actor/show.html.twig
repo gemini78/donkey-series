@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block title %}Actor #
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 mx-auto">
+				<h1 class="text-center my-3">{{actor.name}}</h1>
+				<table class="table mt-5 table-hover table-actor text-center">
+					<thead>
+						<tr>
+							<th>Poster</th>
+							<th>Title</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for program in actor.programs %}
+							<tr>
+								<td>
+									<img width="200" height="300" src="{{program.poster}}" alt="{{ program.title }} poster">
+								</td>
+								<td>
+									<a class="btn btn-outline-secondary" href="{{ path('program_show', { id:program.id })}}">{{program.title}}</a>
+								</td>
+
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

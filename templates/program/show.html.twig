@@ -43,6 +43,17 @@
 			</tbody>
 		</table>
 
+		<strong>Acteurs :</strong>
+		<ul class="list-group my-3">
+			{% for actor in program.actors %}
+				<li class="list-group-item">
+					<a class="btn btn-outline-secondary mb-2" href="{{ path('actor_show', { id:actor.id })}}">{{ actor.name }}</a>
+				</li>
+			{% else %}
+				<li class="list-group-item">Aucun acteur pour cette série</li>
+			{% endfor %}
+		</ul>
+
 
 		<a class="btn btn-outline-primary" href="{{ path('program_index') }}">
 			Retour à la liste des programmes
