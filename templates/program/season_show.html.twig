@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	{{ program.title
+}}{{ program.id }}
+{% endblock %}
+{% block body %}
+	<div class="container mt-5">
+		<div class="media text-center">
+			<div class="image">
+				<img class="align-self-start mr-3" src="{{ program.poster }}" alt="{{ program.title }} poster"/>
+			</div>
+			<div class="media-body">
+				<h1 class="my-3">{{ program.title }}</h1>
+				<p class="synopsis">{{ program.synopsis }}</p>
+			</div>
+		</div>
+
+		<div>
+			<div class="row text-center">
+				<div class="col-md-6">
+					<p>Catégorie :
+						{{ program.category.name }}</p>
+					<p>Season number :
+						{{ season.number }}</p>
+				</div>
+				<div class="col-md-6">
+					<p>Season year :
+						{{ season.year }}</p>
+					<p>Season description :
+						{{ season.description }}</p>
+				</div>
+			</div>
+		</div>
+		<br/>
+		<table class="table table-striped caption-top">
+			<caption class="text-center display-6">
+				Episodes
+			</caption>
+			<thead>
+				<tr class="text-center">
+					<th>Number</th>
+					<th>Title</th>
+					<th>Synopsis</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for episode in episodes %}
+					<tr>
+						<td>{{ episode.number }}</td>
+						<td>{{ episode.title }}</td>
+						<td>
+							<p>{{ episode.synopsis }}</p>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<a href="{{ path('program_index') }}">
+			Retour à la liste des programmes
+		</a>
+	</div>
+{% endblock %}
