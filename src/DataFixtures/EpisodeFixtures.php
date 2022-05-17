@@ -45,11 +45,14 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         foreach (self::EPISODES as $key => $datas) {
+            $slug = $this->slugify->generate($datas['title']);
+
             $episode = new Episode();
             $episode
                 ->setNumber($datas['number'])
                 ->setTitle($datas['title'])
                 ->setSynopsis($datas['synopsis'])
+                ->setSlug($slug)
                 ->setSeason($this->getReference('season_' . $datas['index_season']));
 
             $manager->persist($episode);

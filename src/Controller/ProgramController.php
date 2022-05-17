@@ -9,6 +9,8 @@ use App\Form\ProgramType;
 use App\Repository\EpisodeRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\SeasonRepository;
+use App\Service\Slugify;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +24,6 @@ class ProgramController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(ProgramRepository $programRepository): Response
     {
-
         $programs = $programRepository->findAll();
 
         return $this->render('program/index.html.twig', [
@@ -31,7 +32,7 @@ class ProgramController extends AbstractController
     }
 
     #[Route('/new', name: 'new')]
-    public function new(Request $request, ManagerRegistry $doctrine): Response
+    public function new(Request $request, ManagerRegistry $doctrine, Slugify $slugify): Response
     {
         $program = new Program;
 
@@ -41,6 +42,8 @@ class ProgramController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $slugify->generate($program->getTitle());
+            $program->setSlug($slug);
 
             $em = $doctrine->getManager();
             $em->persist($program);
@@ -53,7 +56,7 @@ class ProgramController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', methods: ['get'], requirements: ['id' => '\d+'], name: 'show')]
+    #[Route('/{slug}', methods: ['get'], requirements: [], name: 'show')]
     public function show(Program $program, ProgramRepository $programRepository, SeasonRepository $seasonRepository): Response
     {
         $seasons = $seasonRepository->findBy(["program" => $program]);
