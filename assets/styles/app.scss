@@ -4,3 +4,8 @@ $primary: #3398DB;
 $secondary: #E67E22;
 
 @import "~bootstrap/scss/bootstrap";
+
+.box-category {
+    display: flex;
+    justify-content: space-between;
+}
